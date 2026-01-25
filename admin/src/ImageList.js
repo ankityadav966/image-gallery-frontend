@@ -7,7 +7,7 @@ function ImageList({ refreshFlag }) {
   const [newTitle, setNewTitle] = useState("");
 
   const getImages = async () => {
-    const res = await axios.get("http://16.170.234.66:5000/api/image/all");
+    const res = await axios.get("https://image-gallery-backend-nro8.onrender.com/api/image/all");
     setImages(res.data);
   };
 

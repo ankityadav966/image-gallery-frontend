@@ -16,7 +16,7 @@ function Upload({ refresh }) {
     formData.append("image", image);
 
     try {
-      await axios.post("http://localhost:5000/api/image/upload", formData);
+      await axios.post("https://image-gallery-backend-nro8.onrender.com/api/image/upload", formData);
       alert("Image Uploaded Successfully");
 
       setTitle("");
