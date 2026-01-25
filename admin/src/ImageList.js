@@ -37,7 +37,8 @@ function ImageList({ refreshFlag }) {
 
       {images.map((img) => (
         <div key={img._id} style={{ marginBottom: "30px" }}>
-          <img src={img.imageUrl} width="200" />
+         <img src={img.imageUrl} width="200" alt={img.title} />
+
           <br />
 
           {editId === img._id ? (
