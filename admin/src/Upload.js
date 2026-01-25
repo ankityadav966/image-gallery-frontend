@@ -23,6 +23,7 @@ function Upload({ refresh }) {
       setImage(null);
       refresh();   // list refresh
     } catch (err) {
+      console.log(err)
       alert("Upload Failed");
     }
   };
