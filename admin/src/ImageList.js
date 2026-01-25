@@ -7,18 +7,18 @@ function ImageList({ refreshFlag }) {
   const [newTitle, setNewTitle] = useState("");
 
   const getImages = async () => {
-    const res = await axios.get("http://localhost:5000/api/image/all");
+    const res = await axios.get("http://16.170.234.66:5000/api/image/all");
     setImages(res.data);
   };
 
   const deleteImage = async (id) => {
-    await axios.delete(`http://localhost:5000/api/image/delete/${id}`);
+    await axios.delete(`http://16.170.234.66:5000/api/image/delete/${id}`);
     alert("Image Deleted");
     getImages();
   };
 
   const updateTitle = async (id) => {
-    await axios.put(`http://localhost:5000/api/image/update/${id}`, {
+    await axios.put(`http://16.170.234.66:5000/api/image/update/${id}`, {
       title: newTitle
     });
 
