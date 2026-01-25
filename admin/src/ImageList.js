@@ -12,13 +12,13 @@ function ImageList({ refreshFlag }) {
   };
 
   const deleteImage = async (id) => {
-    await axios.delete(`http://16.170.234.66:5000/api/image/delete/${id}`);
+    await axios.delete(`http://image-gallery-backend-nro8.onrender.com/api/image/delete/${id}`);
     alert("Image Deleted");
     getImages();
   };
 
   const updateTitle = async (id) => {
-    await axios.put(`http://16.170.234.66:5000/api/image/update/${id}`, {
+    await axios.put(`http://image-gallery-backend-nro8.onrender.com/api/image/update/${id}`, {
       title: newTitle
     });
 
