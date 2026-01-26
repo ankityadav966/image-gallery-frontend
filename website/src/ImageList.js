@@ -1,47 +1,47 @@
 import React, { useEffect, useState } from "react";
+import axios from "axios";
 
 function ImageList() {
   const [images, setImages] = useState([]);
 
-  const BUCKET_URL =
-    "https://ankit-image-gallery-2026.s3.eu-north-1.amazonaws.com";
+  // 🔴 BACKEND LIVE URL YA LOCAL
+const API = "http://localhost:5000/api/image";
 
   useEffect(() => {
     fetchImages();
   }, []);
 
   const fetchImages = async () => {
-    try {
-      const res = await fetch(`${BUCKET_URL}/?list-type=2`);
-      const text = await res.text();
+    const res = await axios.get(`${API}/all`);
+    setImages(res.data);
+  };
 
-      const parser = new DOMParser();
-      const xml = parser.parseFromString(text, "application/xml");
-
-      const contents = Array.from(xml.getElementsByTagName("Contents"));
-
-      const urls = contents.map((item) => {
-        const key = item.getElementsByTagName("Key")[0].textContent;
-        return `${BUCKET_URL}/${key}`;
-      });
-
-      setImages(urls);
-    } catch (err) {
-      console.error("S3 ERROR 👉", err);
-    }
+  const likeImage = async (id) => {
+    await axios.post(`${API}/like/${id}`);
+    fetchImages();   // refresh list
   };
 
   return (
     <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center" }}>
-      {images.map((url, index) => (
-        <div key={index} style={{ margin: "10px" }}>
+      {images.map((img) => (
+        <div
+          key={img._id}
+          style={{
+            border: "1px solid gray",
+            margin: "10px",
+            padding: "10px",
+            width: "220px",
+          }}
+        >
           <img
-            src={url}
-            alt="img"
+            src={img.imageUrl}
+            alt={img.title}
             width="200"
             height="200"
-            style={{ border: "1px solid black" }}
           />
+          <h3>{img.title}</h3>
+          <p>Likes: {img.likes}</p>
+          <button onClick={() => likeImage(img._id)}>❤️ Like</button>
         </div>
       ))}
     </div>

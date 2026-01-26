@@ -7,18 +7,18 @@ function ImageList({ refreshFlag }) {
   const [newTitle, setNewTitle] = useState("");
 
   const getImages = async () => {
-    const res = await axios.get("https://image-gallery-backend-nro8.onrender.com/api/image/all");
+    const res = await axios.get("http://localhost:5000/api/image/all");
     setImages(res.data);
   };
 
   const deleteImage = async (id) => {
-    await axios.delete(`http://image-gallery-backend-nro8.onrender.com/api/image/delete/${id}`);
+    await axios.delete(`http://localhost:5000/api/image/delete/${id}`);
     alert("Image Deleted");
     getImages();
   };
 
   const updateTitle = async (id) => {
-    await axios.put(`http://image-gallery-backend-nro8.onrender.com/api/image/update/${id}`, {
+    await axios.put(`http://localhost:5000/api/image/update/${id}`, {
       title: newTitle
     });
 
@@ -38,7 +38,7 @@ function ImageList({ refreshFlag }) {
       {images.map((img) => (
         <div key={img._id} style={{ marginBottom: "30px" }}>
          <img src={img.imageUrl} width="200" alt={img.title} />
-
+ 
           <br />
 
           {editId === img._id ? (
