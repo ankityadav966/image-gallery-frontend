@@ -7,10 +7,14 @@ function Login({ onLogin }) {
 
   const login = async () => {
     try {
-      const res = await axios.post("https://image-gallery-backend-nr08.onrender.com/api/auth/login", {
-        email,
-        password
-      });
+      const res = await axios.post(
+  "https://image-gallery-backend-nro8.onrender.com/api/auth/login",
+  {
+    email,
+    password
+  }
+);
+
 
       localStorage.setItem("token", res.data.token);
       alert("Login Successful");
