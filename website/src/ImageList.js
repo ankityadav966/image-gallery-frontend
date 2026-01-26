@@ -4,22 +4,29 @@ import axios from "axios";
 function ImageList() {
   const [images, setImages] = useState([]);
 
-  // 🔴 BACKEND LIVE URL YA LOCAL
-const API = "https://image-gallery-backend.onrender.com/api/image";
+  // ✅ SAME LIVE BACKEND URL FOR ALL APIS
+  const API = "https://image-gallery-backend-nro8.onrender.com/api/image";
 
   useEffect(() => {
     fetchImages();
   }, []);
 
   const fetchImages = async () => {
-    const res = await axios.get("https://image-gallery-backend-nro8.onrender.com/api/image/all");
-
-    setImages(res.data);
+    try {
+      const res = await axios.get(`${API}/all`);
+      setImages(res.data);
+    } catch (err) {
+      console.log("Fetch error:", err);
+    }
   };
 
   const likeImage = async (id) => {
-    await axios.post(`${API}/like/${id}`);
-    fetchImages();   // refresh list
+    try {
+      await axios.post(`${API}/like/${id}`);
+      fetchImages(); // refresh list after like
+    } catch (err) {
+      console.log("Like error:", err);
+    }
   };
 
   return (
@@ -32,6 +39,7 @@ const API = "https://image-gallery-backend.onrender.com/api/image";
             margin: "10px",
             padding: "10px",
             width: "220px",
+            textAlign: "center"
           }}
         >
           <img
@@ -39,10 +47,14 @@ const API = "https://image-gallery-backend.onrender.com/api/image";
             alt={img.title}
             width="200"
             height="200"
+            style={{ objectFit: "cover" }}
           />
           <h3>{img.title}</h3>
-          <p>Likes: {img.likes}</p>
-          <button onClick={() => likeImage(img._id)}>❤️ Like</button>
+          <p>❤️ Likes: {img.likes}</p>
+
+          <button onClick={() => likeImage(img._id)}>
+            ❤️ Like
+          </button>
         </div>
       ))}
     </div>
