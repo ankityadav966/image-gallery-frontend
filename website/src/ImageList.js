@@ -12,7 +12,8 @@ const API = "https://image-gallery-backend.onrender.com/api/image";
   }, []);
 
   const fetchImages = async () => {
-    const res = await axios.get(`${API}/all`);
+    const res = await axios.get("https://image-gallery-backend-nro8.onrender.com/api/image/all");
+
     setImages(res.data);
   };
 
