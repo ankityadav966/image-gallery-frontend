@@ -5,7 +5,7 @@ function ImageList() {
   const [images, setImages] = useState([]);
 
   // 🔴 BACKEND LIVE URL YA LOCAL
-const API = "http://localhost:5000/api/image";
+const API = "https://image-gallery-backend.onrender.com/api/image";
 
   useEffect(() => {
     fetchImages();
