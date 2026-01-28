@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-const API = "https://image-gallery-backend-nro8.onrender.com/api/image";
+const API = "http://16.170.234.66:5000/api/image";
 
 function ImageList({ refreshFlag }) {
   const [images, setImages] = useState([]);
