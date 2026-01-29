@@ -8,21 +8,20 @@ function Login({ onLogin }) {
   const login = async () => {
     try {
       const res = await axios.post(
-  "http://16.170.234.66:5000/api/auth/login",
-  
-  {
-    email,
-    password
-  }
-);
-
+        "https://image-gallery-backend-nro8.onrender.com/api/auth/login",
+        {
+          email,
+          password
+        }
+      );
 
       localStorage.setItem("token", res.data.token);
       alert("Login Successful");
       onLogin();
 
     } catch (err) {
-      alert("Login Failed");
+      console.error(err.response?.data || err.message);
+      alert(err.response?.data?.message || "Login Failed");
     }
   };
 
@@ -33,6 +32,7 @@ function Login({ onLogin }) {
       <input
         type="email"
         placeholder="Email"
+        value={email}
         onChange={(e) => setEmail(e.target.value)}
       />
       <br /><br />
@@ -40,6 +40,7 @@ function Login({ onLogin }) {
       <input
         type="password"
         placeholder="Password"
+        value={password}
         onChange={(e) => setPassword(e.target.value)}
       />
       <br /><br />
